@@ -38,4 +38,4 @@ def sort():
     steam.sort_values(by=['price'], inplace=True, ascending=True)
     print(steam[['name', 'price']])
 sort()
-
+#reeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee

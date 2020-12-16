@@ -39,3 +39,4 @@ def sort():
     print(steam[['name', 'price']])
 sort()
 #reeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+# help me

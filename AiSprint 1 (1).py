@@ -38,15 +38,4 @@ def sort():
     steam.sort_values(by=['price'], inplace=True, ascending=True)
     print(steam[['name', 'price']])
 sort()
-#reeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-# help me
-# test
-#ther
-# welkom
-# the
-#th e
-##################
-#test reeeeeeee
-#hallo
-#dsdssdsd
-#dssssssssssssssssssssssss
+

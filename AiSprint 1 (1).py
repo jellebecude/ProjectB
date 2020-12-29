@@ -40,15 +40,4 @@ def prijs_sort():
     print(steam[['name', 'price']])
 
 
-def positive_ratings_sort():
-    steam.sort_values(by=['positive_ratings'], inplace=True, ascending=False)
-    print(steam[['name', 'positive_ratings']])
-
-
-def negative_ratings_sort():
-    steam.sort_values(by=['negative_ratings'], inplace=True, ascending=False)
-    print(steam[['name', 'negative_ratings']])
-
-
-negative_ratings_sort()
 gui()

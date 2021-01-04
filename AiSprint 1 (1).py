@@ -24,6 +24,7 @@ def list_functie(thing):
             ree = i[thing]
             mylist.append(ree)
     print(mylist)
+    return mylist
 
 
 # Function to do insertion sort

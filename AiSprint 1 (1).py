@@ -21,23 +21,34 @@ file_load()
 
 # Zet alles in  een list vanaf een json file url
 def list_functie(thing, thing2):
-    naamlijst = []
-    prijslijst = []
+    listone = []
+    listtwo = []
     with urllib.request.urlopen(
             'https://raw.githubusercontent.com/tijmenjoppe/AnalyticalSkills-student/master/project/data/steam.json') as url:
         data = json.loads(url.read().decode())
         for i in data:
             naam = i[thing]
             prijs = i[thing2]
-            naamlijst.append(naam)
-            prijslijst.append(prijs)
-    return naamlijst, prijslijst
+            listone.append(naam)
+            listtwo.append(prijs)
+    return listone, listtwo
 
 
 list_functie("name", "price")
 
 
-def pricesort(prijslijst, naamlijst):
+def pricesort():
+    naamlijst = []
+    prijslijst = []
+    with urllib.request.urlopen(
+            'https://raw.githubusercontent.com/tijmenjoppe/AnalyticalSkills-student/master/project/data/steam.json') as url:
+        data = json.loads(url.read().decode())
+        for i in data:
+            naam = i["name"]
+            prijs = i["price"]
+            naamlijst.append(naam)
+            prijslijst.append(prijs)
+
     omgewisseld = True
     while omgewisseld:
         omgewisseld = False
@@ -49,6 +60,9 @@ def pricesort(prijslijst, naamlijst):
 
     for x in range(len(prijslijst)):
         print(naamlijst[x], prijslijst[x])
+
+
+pricesort()
 
 
 # Function to do insertion sort

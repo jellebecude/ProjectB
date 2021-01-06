@@ -3,32 +3,59 @@ import json
 from tkinter import *
 import urllib.request
 
-#zet panda library settings
-#globally defined het bronbestand als "steam"
-#voor mogelijke directoy problemen op andere apparaten is de website gebruikt
+
+# zet panda library settings
+# globally defined het bronbestand als "steam"
+# voor mogelijke directoy problemen op andere apparaten is de website gebruikt
 def file_load():
     pd.set_option('display.min_rows', None)
     pd.set_option('display.max_rows', None)
     pd.set_option('display.max_columns', None)
     global steam
-    steam = pd.read_json('https://raw.githubusercontent.com/tijmenjoppe/AnalyticalSkills-student/master/project/data/steam.json')
+    steam = pd.read_json(
+        'https://raw.githubusercontent.com/tijmenjoppe/AnalyticalSkills-student/master/project/data/steam.json')
+
+
 file_load()
 
 
-#Zet alles in  een list vanaf een json file url
-def list_functie(thing):
-    mylist = []
-    with urllib.request.urlopen('https://raw.githubusercontent.com/tijmenjoppe/AnalyticalSkills-student/master/project/data/steam.json') as url:
+# Zet alles in  een list vanaf een json file url
+def list_functie(thing, thing2):
+    naamlijst = []
+    prijslijst = []
+    with urllib.request.urlopen(
+            'https://raw.githubusercontent.com/tijmenjoppe/AnalyticalSkills-student/master/project/data/steam.json') as url:
         data = json.loads(url.read().decode())
         for i in data:
-            ree = i[thing]
-            mylist.append(ree)
-    print(mylist)
-    return mylist
+            naam = i[thing]
+            prijs = i[thing2]
+            naamlijst.append(naam)
+            prijslijst.append(prijs)
+
+    print("Data is opgehaald en wordt nu gesorteerd")
+    
+    omgewisseld = True
+    while omgewisseld:
+        omgewisseld = False
+        for x in range(len(prijslijst) - 1):    # aantal elementen in lijst
+            if prijslijst[x] > prijslijst[x + 1]:
+                prijslijst[x], prijslijst[x + 1] = prijslijst[x + 1], prijslijst[x]
+                naamlijst[x], naamlijst[x + 1] = naamlijst[x + 1], naamlijst[x]
+                omgewisseld = True
+
+    print("Data is gesorteerd en wordt nu geprint")
+
+    naamprijs = zip(naamlijst, prijslijst)
+    for namen, prijzen in naamprijs:
+        print("{} kost €{}".format(namen, prijzen))
+    return naamprijs
+
+
+list_functie("name", "price")
 
 
 # Function to do insertion sort
-def insertionSort(the_list):
+def insertionsort(the_list):
     # Traverse through 1 to len(arr)
     for i in range(1, len(the_list)):
         key = the_list[i]
@@ -41,9 +68,11 @@ def insertionSort(the_list):
             j -= 1
         the_list[j + 1] = key
 
-    #simpele GUI
-#(voorlopig) alleen functioneel
-#laat de naam van het eerste spel in het bronbestand zien
+    # simpele GUI
+
+
+# (voorlopig) alleen functioneel
+# laat de naam van het eerste spel in het bronbestand zien
 def gui():
     screen = Tk()
     screen.geometry("480x270")
@@ -55,15 +84,13 @@ def gui():
     label1.pack()
 
     screen.mainloop()
+
+
 gui()
 
 
-#sorteer de data
-#hier is het als voorbeeld op prijs gesorteerd
+# sorteer de data
+# hier is het als voorbeeld op prijs gesorteerd
 def sort():
     steam.sort_values(by=['price'], inplace=True, ascending=True)
     print(steam[['name', 'price']])
-sort()
-
-# hallo
-# the

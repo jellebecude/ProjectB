@@ -31,27 +31,24 @@ def list_functie(thing, thing2):
             prijs = i[thing2]
             naamlijst.append(naam)
             prijslijst.append(prijs)
+    return naamlijst, prijslijst
 
-    print("Data is opgehaald en wordt nu gesorteerd")
-    
+
+list_functie("name", "price")
+
+
+def pricesort(prijslijst, naamlijst):
     omgewisseld = True
     while omgewisseld:
         omgewisseld = False
-        for x in range(len(prijslijst) - 1):    # aantal elementen in lijst
+        for x in range(len(prijslijst) - 1):  # aantal elementen in lijst
             if prijslijst[x] > prijslijst[x + 1]:
                 prijslijst[x], prijslijst[x + 1] = prijslijst[x + 1], prijslijst[x]
                 naamlijst[x], naamlijst[x + 1] = naamlijst[x + 1], naamlijst[x]
                 omgewisseld = True
 
-    print("Data is gesorteerd en wordt nu geprint")
-
-    naamprijs = zip(naamlijst, prijslijst)
-    for namen, prijzen in naamprijs:
-        print("{} kost €{}".format(namen, prijzen))
-    return naamprijs
-
-
-list_functie("name", "price")
+    for x in range(len(prijslijst)):
+        print(naamlijst[x], prijslijst[x])
 
 
 # Function to do insertion sort

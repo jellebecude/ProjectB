@@ -17,26 +17,42 @@ def file_load():
 
 
 file_load()
+def insertionsort(the_list):
+    # Traverse through 1 to len(arr)
+    for i in range(1, len(the_list)):
+        key = the_list[i]
+        # Move elements of arr[0..i-1], that are
+        # greater than key, to one position ahead
+        # of their current position
+        j = i - 1
+        while j >= 0 and key < the_list[j]:
+            the_list[j + 1] = the_list[j]
+            j -= 1
+        the_list[j + 1] = key
+    return the_list
+    # simpele GUI
 
 
 # Zet alles in  een list vanaf een json file url
-def list_functie(thing, thing2):
+def list_functie(thing1, thing2):
     listone = []
-    listtwo = []
     with urllib.request.urlopen(
             'https://raw.githubusercontent.com/tijmenjoppe/AnalyticalSkills-student/master/project/data/steam.json') as url:
         data = json.loads(url.read().decode())
+        # print(sorted(data, key = lambda i: (i['name'])))
         for i in data:
-            naam = i[thing]
-            prijs = i[thing2]
+            naam = i[thing1],i[thing2]
             listone.append(naam)
-            listtwo.append(prijs)
-    return listone, listtwo
+    return listone
 
 
-list_functie("name", "price")
 
+def pricesort_new():
+    pijslist = list_functie( "price", "name")
+    sortedprijs = insertionsort(pijslist)
+    print(sortedprijs)
 
+pricesort_new()
 def pricesort():
     naamlijst = []
     prijslijst = []
@@ -67,24 +83,10 @@ def pricesort():
         print(sortnaamlijst[x], sortprijslijst[x])
 
 
-pricesort()
+
 
 
 # Function to do insertion sort
-def insertionsort(the_list):
-    # Traverse through 1 to len(arr)
-    for i in range(1, len(the_list)):
-        key = the_list[i]
-        # Move elements of arr[0..i-1], that are
-        # greater than key, to one position ahead
-        # of their current position
-        j = i - 1
-        while j >= 0 and key < the_list[j]:
-            the_list[j + 1] = the_list[j]
-            j -= 1
-        the_list[j + 1] = key
-
-    # simpele GUI
 
 
 # (voorlopig) alleen functioneel

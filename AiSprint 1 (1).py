@@ -49,17 +49,22 @@ def pricesort():
             naamlijst.append(naam)
             prijslijst.append(prijs)
 
-    omgewisseld = True
-    while omgewisseld:
-        omgewisseld = False
-        for x in range(len(prijslijst) - 1):  # aantal elementen in lijst
-            if prijslijst[x] > prijslijst[x + 1]:
-                prijslijst[x], prijslijst[x + 1] = prijslijst[x + 1], prijslijst[x]
-                naamlijst[x], naamlijst[x + 1] = naamlijst[x + 1], naamlijst[x]
-                omgewisseld = True
-
-    for x in range(len(prijslijst)):
-        print(naamlijst[x], prijslijst[x])
+    sortnaamlijst = []
+    sortprijslijst = []
+    while prijslijst:
+        mini = prijslijst[0]
+        mini2 = naamlijst[0]
+        for item in prijslijst:
+            if item < mini:
+                mini = item
+                index = prijslijst.index(item)
+                mini2 = naamlijst[index]
+        sortprijslijst.append(mini)
+        prijslijst.remove(mini)
+        sortnaamlijst.append(mini2)
+        naamlijst.remove(mini2)
+    for x in range(len(sortprijslijst)):
+        print(sortnaamlijst[x], sortprijslijst[x])
 
 
 pricesort()

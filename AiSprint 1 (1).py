@@ -53,34 +53,6 @@ def pricesort_new():
     print(sortedprijs)
 
 pricesort_new()
-def pricesort():
-    naamlijst = []
-    prijslijst = []
-    with urllib.request.urlopen(
-            'https://raw.githubusercontent.com/tijmenjoppe/AnalyticalSkills-student/master/project/data/steam.json') as url:
-        data = json.loads(url.read().decode())
-        for i in data:
-            naam = i["name"]
-            prijs = i["price"]
-            naamlijst.append(naam)
-            prijslijst.append(prijs)
-
-    sortnaamlijst = []
-    sortprijslijst = []
-    while prijslijst:
-        mini = prijslijst[0]
-        mini2 = naamlijst[0]
-        for item in prijslijst:
-            if item < mini:
-                mini = item
-                index = prijslijst.index(item)
-                mini2 = naamlijst[index]
-        sortprijslijst.append(mini)
-        prijslijst.remove(mini)
-        sortnaamlijst.append(mini2)
-        naamlijst.remove(mini2)
-    for x in range(len(sortprijslijst)):
-        print(sortnaamlijst[x], sortprijslijst[x])
 
 
 

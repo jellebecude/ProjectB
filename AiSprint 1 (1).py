@@ -51,10 +51,17 @@ def pricesort_new():
     pijslist = list_functie( "price", "name")
     sortedprijs = insertionsort(pijslist)
     print(sortedprijs)
-
 pricesort_new()
 
+def genresort_new():
+    pijslist = list_functie( "genres", "name")
+    sortedprijs = insertionsort(pijslist)
+    return sortedprijs
 
+def devsort_new():
+    pijslist = list_functie( "developer", "name")
+    sortedprijs = insertionsort(pijslist)
+    return sortedprijs
 
 
 
@@ -67,11 +74,32 @@ def gui():
     screen = Tk()
     screen.geometry("480x270")
 
+
+    def developersort():
+        label1.config(text=devsort_new())
+
+    def genresort():
+        label1.config(text=genresort_new())
+
     label1 = Label(
         master=screen,
         text=steam[['name']].head(1),
     )
     label1.pack()
+
+    devsortbutton = Button(
+        master=screen,
+        text='sorteer op developer',
+        command=developersort
+    )
+    devsortbutton.pack(side=LEFT)
+
+    genresortbutton = Button(
+        master=screen,
+        text='sorteer op genre',
+        command=genresort
+    )
+    genresortbutton.pack(side=RIGHT)
 
     screen.mainloop()
 

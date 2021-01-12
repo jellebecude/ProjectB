@@ -62,6 +62,28 @@ def gemiddelde(lijst):
     return round(gem)
 
 
+def freq(lijst):    # returns hoevaak iets terugkomt
+    newlst = []
+    for items in lijst:
+        newlst.append(items[0])
+    freqs = {x: newlst.count(x) for x in newlst}    # getal : aantal voorkomens
+    return freqs
+
+
+def modes(lijst):   # returnt wat het meeste voorkomt
+    modi = []
+    waardes = freq(lijst)
+    grootste = 0
+    for waarde in waardes.values():
+        if waarde > grootste:
+            grootste = waarde
+
+    for key, value in waardes.items():
+        if value == grootste:
+            modi.append(key)
+    return sorted(modi)
+
+
 pricesort_new()
 
 
@@ -86,7 +108,6 @@ def positive_ratings():
 def negative_ratings():
     pijslist = list_functie("negative_ratings", "name")
     sortedprijs = insertionsort(pijslist)
-    print(sortedprijs)
     return sortedprijs
 
 
@@ -96,7 +117,6 @@ def owners():
     return sortedprijs
 
 
-print(gemiddelde(negative_ratings()))
 # Function to do insertion sort
 
 

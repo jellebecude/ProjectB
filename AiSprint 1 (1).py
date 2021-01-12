@@ -17,6 +17,8 @@ def file_load():
 
 
 file_load()
+
+
 def insertionsort(the_list):
     # Traverse through 1 to len(arr)
     for i in range(1, len(the_list)):
@@ -30,7 +32,6 @@ def insertionsort(the_list):
             j -= 1
         the_list[j + 1] = key
     return the_list
-    # simpele GUI
 
 
 # Zet alles in  een list vanaf een json file url
@@ -41,30 +42,61 @@ def list_functie(thing1, thing2):
         data = json.loads(url.read().decode())
         # print(sorted(data, key = lambda i: (i['name'])))
         for i in data:
-            naam = i[thing1],i[thing2]
+            naam = i[thing1], i[thing2]
             listone.append(naam)
     return listone
 
 
-
 def pricesort_new():
-    pijslist = list_functie( "price", "name")
+    pijslist = list_functie("price", "name")
     sortedprijs = insertionsort(pijslist)
-    print(sortedprijs)
+    # print(sortedprijs)
+
+
+def gemiddelde(lijst):
+    items = len(lijst)
+    totaal = 0
+    for item in lijst:
+        totaal = totaal + item[0]
+    gem = (totaal / items)
+    return round(gem)
+
+
 pricesort_new()
 
+
 def genresort_new():
-    pijslist = list_functie( "genres", "name")
+    pijslist = list_functie("genres", "name")
     sortedprijs = insertionsort(pijslist)
     return sortedprijs
+
 
 def devsort_new():
-    pijslist = list_functie( "developer", "name")
+    pijslist = list_functie("developer", "name")
     sortedprijs = insertionsort(pijslist)
     return sortedprijs
 
 
+def positive_ratings():
+    pijslist = list_functie("positive_ratings", "name")
+    sortedprijs = insertionsort(pijslist)
+    return sortedprijs
 
+
+def negative_ratings():
+    pijslist = list_functie("negative_ratings", "name")
+    sortedprijs = insertionsort(pijslist)
+    print(sortedprijs)
+    return sortedprijs
+
+
+def owners():
+    pijslist = list_functie("owners", "name")
+    sortedprijs = insertionsort(pijslist)
+    return sortedprijs
+
+
+print(gemiddelde(negative_ratings()))
 # Function to do insertion sort
 
 
@@ -73,7 +105,6 @@ def devsort_new():
 def gui():
     screen = Tk()
     screen.geometry("480x270")
-
 
     def developersort():
         label1.config(text=devsort_new())

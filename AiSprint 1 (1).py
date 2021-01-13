@@ -240,12 +240,6 @@ def gui():
         )
         minstvoorkomend.pack()
 
-    def developersort():
-        label1.config(text=devsort_new())
-
-    def genresort():
-        label1.config(text=genresort_new())
-
     label1 = Label(
         master=screen,
         text=steam[['name']].head(1),

@@ -84,7 +84,7 @@ def modes(lijst):   # returnt wat het meeste voorkomt
     return sorted(modi)
 
 
-pricesort_new()
+# pricesort_new()
 
 
 def genresort_new():

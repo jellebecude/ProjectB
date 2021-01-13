@@ -66,8 +66,18 @@ def freq(lijst):    # returns hoevaak iets terugkomt
     newlst = []
     for items in lijst:
         newlst.append(items[0])
-    freqs = {x: newlst.count(x) for x in newlst}    # getal : aantal voorkomens
+    freqs = dict()
+    for i in newlst:
+        if (i in freqs):
+            freqs[i] += 1
+        else:
+            freqs[i] = 1
+
     return freqs
+
+    # getal : aantal voorkomens
+
+
 
 
 def modes(lijst):   # returnt wat het meeste voorkomt

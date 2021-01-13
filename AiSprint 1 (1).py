@@ -127,6 +127,120 @@ def gui():
     screen.geometry("480x270")
 
     def developersort():
+        developersortwindow = Toplevel(screen)
+        developersortwindow.title('sorteren op developer')
+        developersortwindow.geometry('500x500')
+
+        infolabel = Label(
+            master=developersortwindow,
+            text='hoe wil je de developers sorteren?'
+        )
+        infolabel.pack(side=TOP)
+
+        lijstlabel = Label(
+            master=developersortwindow,
+            text=''
+        )
+        lijstlabel.pack(side=TOP)
+
+        knoppen = Frame(developersortwindow)
+        knoppen.pack(side=BOTTOM)
+
+        def alphasort():
+            lijstlabel.config(text='sort placeholde')
+        alphabetische = Button(
+            master=knoppen,
+            text='sorteer op alphabetische volgorde',
+            command=alphasort
+        )
+        alphabetische.pack()
+
+        def reversealphasort():
+            lijstlabel.config(text='reversesort placeholder')
+        reversedalphabetische = Button(
+            master=knoppen,
+            text='sorteer op alphabetische volgorde omgedraaid',
+            command=reversealphasort
+        )
+        reversedalphabetische.pack()
+
+        def modus():
+            devlist = list_functie("developer", "name")
+            modus = counter(devlist)
+            lijstlabel.config(text=modus)
+        meestvoorkomend = Button(
+            master=knoppen,
+            text='sorteer op meest voorkomend',
+            command=modus
+        )
+        meestvoorkomend.pack()
+
+        def nietmodus():
+            lijstlabel.config(text='niet modus sort placeholder')
+        minstvoorkomend = Button(
+            master=knoppen,
+            text='sorteer op minst voorkomend',
+            command=nietmodus
+        )
+        minstvoorkomend.pack()
+
+    def genresort():
+        genresortwindow = Toplevel(screen)
+        genresortwindow.title('sorteren op genres')
+        genresortwindow.geometry('500x500')
+
+        infolabel = Label(
+            master=genresortwindow,
+            text='hoe wil je de genres sorteren?'
+        )
+        infolabel.pack(side=TOP)
+
+        lijstlabel = Label(
+            master=genresortwindow,
+            text=''
+        )
+        lijstlabel.pack(side=TOP)
+
+        knoppen = Frame(genresortwindow)
+        knoppen.pack(side=BOTTOM)
+
+        def alphasort():
+            lijstlabel.config(text='alphasort placeholder')
+        alphabetische = Button(
+            master=knoppen,
+            text='sorteer op alphabetische volgorde',
+            command=alphasort
+        )
+        alphabetische.pack()
+
+        def reversealphasort():
+            lijstlabel.config(text='reverse alphasort placeholder')
+        reversedalphabetische = Button(
+            master=knoppen,
+            text='sorteer op alphabetische volgorde omgedraaid',
+            command=reversealphasort
+        )
+        reversedalphabetische.pack()
+
+        def modus():
+            lijstlabel.config(text='modus placeholder')
+        meestvoorkomend = Button(
+            master=knoppen,
+            text='sorteer op meest voorkomend',
+            command=modus
+        )
+        meestvoorkomend.pack()
+
+        def nietmodus():
+            lijstlabel.config(text='niet modus placeholder')
+        minstvoorkomend = Button(
+            master=knoppen,
+            text='sorteer op minst voorkomend',
+            command=nietmodus
+        )
+        minstvoorkomend.pack()
+
+    def developersort():
         label1.config(text=devsort_new())
 
     def genresort():

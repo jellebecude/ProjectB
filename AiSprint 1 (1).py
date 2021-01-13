@@ -63,6 +63,12 @@ def devsort_new():
     sortedprijs = insertionsort(pijslist)
     return sortedprijs
 
+def counter(thing):
+    d={}
+    for i in thing:
+        d[i] = d.get(i,0) + 1
+    modus = d, key=d.get
+    return modus
 
 
 # Function to do insertion sort

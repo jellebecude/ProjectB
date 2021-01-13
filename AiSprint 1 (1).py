@@ -17,8 +17,6 @@ def file_load():
 
 
 file_load()
-
-
 def insertionsort(the_list):
     # Traverse through 1 to len(arr)
     for i in range(1, len(the_list)):
@@ -32,6 +30,7 @@ def insertionsort(the_list):
             j -= 1
         the_list[j + 1] = key
     return the_list
+    # simpele GUI
 
 
 # Zet alles in  een list vanaf een json file url
@@ -42,79 +41,28 @@ def list_functie(thing1, thing2):
         data = json.loads(url.read().decode())
         # print(sorted(data, key = lambda i: (i['name'])))
         for i in data:
-            naam = i[thing1], i[thing2]
+            naam = i[thing1],i[thing2]
             listone.append(naam)
     return listone
 
 
+
 def pricesort_new():
-    pijslist = list_functie("price", "name")
+    pijslist = list_functie( "price", "name")
     sortedprijs = insertionsort(pijslist)
-    # print(sortedprijs)
-
-
-def gemiddelde(lijst):
-    items = len(lijst)
-    totaal = 0
-    for item in lijst:
-        totaal = totaal + item[0]
-    gem = (totaal / items)
-    return round(gem)
-
-
-def freq(lijst):    # returns hoevaak iets terugkomt
-    newlst = []
-    for items in lijst:
-        newlst.append(items[0])
-    freqs = {x: newlst.count(x) for x in newlst}    # getal : aantal voorkomens
-    return freqs
-
-
-def modes(lijst):   # returnt wat het meeste voorkomt
-    modi = []
-    waardes = freq(lijst)
-    grootste = 0
-    for waarde in waardes.values():
-        if waarde > grootste:
-            grootste = waarde
-
-    for key, value in waardes.items():
-        if value == grootste:
-            modi.append(key)
-    return sorted(modi)
-
-
+    print(sortedprijs)
 pricesort_new()
 
-
 def genresort_new():
-    pijslist = list_functie("genres", "name")
+    pijslist = list_functie( "genres", "name")
     sortedprijs = insertionsort(pijslist)
     return sortedprijs
-
 
 def devsort_new():
-    pijslist = list_functie("developer", "name")
+    pijslist = list_functie( "developer", "name")
     sortedprijs = insertionsort(pijslist)
     return sortedprijs
 
-
-def positive_ratings():
-    pijslist = list_functie("positive_ratings", "name")
-    sortedprijs = insertionsort(pijslist)
-    return sortedprijs
-
-
-def negative_ratings():
-    pijslist = list_functie("negative_ratings", "name")
-    sortedprijs = insertionsort(pijslist)
-    return sortedprijs
-
-
-def owners():
-    pijslist = list_functie("owners", "name")
-    sortedprijs = insertionsort(pijslist)
-    return sortedprijs
 
 
 # Function to do insertion sort
@@ -126,11 +74,125 @@ def gui():
     screen = Tk()
     screen.geometry("480x270")
 
+
     def developersort():
-        label1.config(text=devsort_new())
+        label1.config(text=devsort_new())    def developersort():
+        developersortwindow = Toplevel(screen)
+        developersortwindow.title('sorteren op developer')
+        developersortwindow.geometry('500x500')
+
+        infolabel = Label(
+            master=developersortwindow,
+            text='hoe wil je de developers sorteren?'
+        )
+        infolabel.pack(side=TOP)
+
+        lijstlabel = Label(
+            master=developersortwindow,
+            text=''
+        )
+        lijstlabel.pack(side=TOP)
+
+        knoppen = Frame(developersortwindow)
+        knoppen.pack(side=BOTTOM)
+
+        def alphasort():
+            lijstlabel.config(text='sort placeholde')
+        alphabetische = Button(
+            master=knoppen,
+            text='sorteer op alphabetische volgorde',
+            command=alphasort
+        )
+        alphabetische.pack()
+
+        def reversealphasort():
+            lijstlabel.config(text='reversesort placeholder')
+        reversedalphabetische = Button(
+            master=knoppen,
+            text='sorteer op alphabetische volgorde omgedraaid',
+            command=reversealphasort
+        )
+        reversedalphabetische.pack()
+
+        def modus():
+            devlist = list_functie("developer", "name")
+            modus = counter(devlist)
+            lijstlabel.config(text=modus)
+        meestvoorkomend = Button(
+            master=knoppen,
+            text='sorteer op meest voorkomend',
+            command=modus
+        )
+        meestvoorkomend.pack()
+
+        def nietmodus():
+            lijstlabel.config(text='niet modus sort placeholder')
+        minstvoorkomend = Button(
+            master=knoppen,
+            text='sorteer op minst voorkomend',
+            command=nietmodus
+        )
+        minstvoorkomend.pack()
 
     def genresort():
-        label1.config(text=genresort_new())
+        genresortwindow = Toplevel(screen)
+        genresortwindow.title('sorteren op genres')
+        genresortwindow.geometry('500x500')
+
+        infolabel = Label(
+            master=genresortwindow,
+            text='hoe wil je de genres sorteren?'
+        )
+        infolabel.pack(side=TOP)
+
+        lijstlabel = Label(
+            master=genresortwindow,
+            text=''
+        )
+        lijstlabel.pack(side=TOP)
+
+        knoppen = Frame(genresortwindow)
+        knoppen.pack(side=BOTTOM)
+
+        def alphasort():
+            lijstlabel.config(text='alphasort placeholder')
+
+        alphabetische = Button(
+            master=knoppen,
+            text='sorteer op alphabetische volgorde',
+            command=alphasort
+        )
+        alphabetische.pack()
+
+        def reversealphasort():
+            lijstlabel.config(text='reverse alphasort placeholder')
+
+        reversedalphabetische = Button(
+            master=knoppen,
+            text='sorteer op alphabetische volgorde omgedraaid',
+            command=reversealphasort
+        )
+        reversedalphabetische.pack()
+
+        def modus():
+            lijstlabel.config(text='modus placeholder')
+
+        meestvoorkomend = Button(
+            master=knoppen,
+            text='sorteer op meest voorkomend',
+            command=modus
+        )
+        meestvoorkomend.pack()
+
+        def nietmodus():
+            lijstlabel.config(text='niet modus placeholder')
+
+        minstvoorkomend = Button(
+            master=knoppen,
+            text='sorteer op minst voorkomend',
+            command=nietmodus
+        )
+        minstvoorkomend.pack()
 
     label1 = Label(
         master=screen,

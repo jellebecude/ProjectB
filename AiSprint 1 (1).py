@@ -50,7 +50,7 @@ def list_functie(thing1, thing2):
 def pricesort_new():
     pijslist = list_functie("price", "name")
     sortedprijs = insertionsort(pijslist)
-    # print(sortedprijs)
+    return sortedprijs
 
 
 def gemiddelde(lijst):
@@ -62,13 +62,13 @@ def gemiddelde(lijst):
     return round(gem)
 
 
-def freq(lijst):    # returns hoevaak iets terugkomt
+def freq(lijst):  # returns hoevaak iets terugkomt
     newlst = []
     for items in lijst:
         newlst.append(items[0])
     freqs = dict()
     for i in newlst:
-        if (i in freqs):
+        if i in freqs:
             freqs[i] += 1
         else:
             freqs[i] = 1
@@ -78,9 +78,7 @@ def freq(lijst):    # returns hoevaak iets terugkomt
     # getal : aantal voorkomens
 
 
-
-
-def modes(lijst):   # returnt wat het meeste voorkomt
+def modes(lijst):  # returnt wat het meeste voorkomt
     modi = []
     waardes = freq(lijst)
     grootste = 0
@@ -94,7 +92,12 @@ def modes(lijst):   # returnt wat het meeste voorkomt
     return sorted(modi)
 
 
-# pricesort_new()
+def mini(lijst):
+    return lijst[0]
+
+
+def maxi(lijst):
+    return lijst[-1]
 
 
 def genresort_new():
@@ -126,7 +129,8 @@ def owners():
     sortedprijs = insertionsort(pijslist)
     return sortedprijs
 
-def frequencysort(lijst):   #returned lijst gesorteerd op meest voorkomende
+
+def frequencysort(lijst):  # returned lijst gesorteerd op meest voorkomende
     waardes = freq(lijst)
     for i in waardes.values():
         key = lijst[i]
@@ -136,6 +140,7 @@ def frequencysort(lijst):   #returned lijst gesorteerd op meest voorkomende
             j -= 1
         lijst[j + 1] = key
     return lijst
+
 
 # Function to do insertion sort
 
@@ -153,7 +158,7 @@ def gui():
 
         infolabel = Label(
             master=developersortwindow,
-            text='hoe wil je de developers sorteren?'
+            text='Hoe wil je de developers sorteren?'
         )
         infolabel.pack(side=TOP)
 
@@ -174,7 +179,7 @@ def gui():
 
         alphabetische = Button(
             master=knoppen,
-            text='sorteer op alphabetische volgorde A-Z',
+            text='Sorteer op alphabetische volgorde A-Z',
             command=alphasort
         )
         alphabetische.pack()
@@ -188,7 +193,7 @@ def gui():
 
         reversedalphabetische = Button(
             master=knoppen,
-            text='sorteer op alphabetische volgorde Z-A',
+            text='Sorteer op alphabetische volgorde Z-A',
             command=reversealphasort
         )
         reversedalphabetische.pack()
@@ -205,7 +210,7 @@ def gui():
 
         meestvoorkomend = Button(
             master=knoppen,
-            text='sorteer op meest voorkomend',
+            text='Sorteer op meest voorkomend',
             command=modus
         )
         meestvoorkomend.pack()
@@ -219,7 +224,7 @@ def gui():
 
         minstvoorkomend = Button(
             master=knoppen,
-            text='sorteer op minst voorkomend',
+            text='Sorteer op minst voorkomend',
             command=nietmodus
         )
         minstvoorkomend.pack()
@@ -231,7 +236,7 @@ def gui():
 
         infolabel = Label(
             master=genresortwindow,
-            text='hoe wil je de genres sorteren?'
+            text='Hoe wil je de genres sorteren?'
         )
         infolabel.pack(side=TOP)
 
@@ -252,7 +257,7 @@ def gui():
 
         alphabetische = Button(
             master=knoppen,
-            text='sorteer op alphabetische volgorde A-Z',
+            text='Sorteer op alphabetische volgorde A-Z',
             command=alphasort
         )
         alphabetische.pack()
@@ -266,7 +271,7 @@ def gui():
 
         reversedalphabetische = Button(
             master=knoppen,
-            text='sorteer op alphabetische volgorde Z-A',
+            text='Sorteer op alphabetische volgorde Z-A',
             command=reversealphasort
         )
         reversedalphabetische.pack()
@@ -283,7 +288,7 @@ def gui():
 
         meestvoorkomend = Button(
             master=knoppen,
-            text='sorteer op meest voorkomend',
+            text='Sorteer op meest voorkomend',
             command=modus
         )
         meestvoorkomend.pack()
@@ -297,14 +302,101 @@ def gui():
 
         minstvoorkomend = Button(
             master=knoppen,
-            text='sorteer op minst voorkomend',
+            text='Sorteer op minst voorkomend',
             command=nietmodus
         )
         minstvoorkomend.pack()
 
+    def pricesort():
+        pricesortwindow = Toplevel(screen)
+        pricesortwindow.title('sorteren op developer')
+        pricesortwindow.geometry('500x500')
+
+        infolabel1 = Label(
+            master=pricesortwindow,
+            text='Hoe wil je de prijs sorteren?'
+        )
+        infolabel1.pack(side=TOP)
+
+        lijstlabel = Listbox(
+            master=pricesortwindow,
+            width=80
+        )
+        lijstlabel.pack(side=TOP)
+
+        knoppen = Frame(pricesortwindow)
+        knoppen.pack(side=BOTTOM)
+
+        def posrate():
+            lijstlabel.delete(0, END)
+            sortedlist = reversed(positive_ratings())
+            for i in sortedlist:
+                lijstlabel.insert(END, i)
+
+        alphabetische = Button(
+            master=knoppen,
+            text='Sorteer op positive ratings',
+            command=posrate
+        )
+        alphabetische.pack()
+
+        def negrate():
+            lijstlabel.delete(0, END)
+            sortedlist = negative_ratings()
+            for i in sortedlist:
+                lijstlabel.insert(END, i)
+
+        reversedalphabetische = Button(
+            master=knoppen,
+            text='Sorteer op negative ratings',
+            command=negrate
+        )
+        reversedalphabetische.pack()
+
+        def prijs():
+            lijstlabel.delete(0, END)
+            sortedlist = pricesort_new()
+            test = reversed(sortedlist)
+            for i in test:
+                lijstlabel.insert(END, i)
+
+        meestvoorkomend = Button(
+            master=knoppen,
+            text='Sorteer van duur naar goedkoop',
+            command=prijs
+        )
+        meestvoorkomend.pack()
+
+        def prijs2():
+            lijstlabel.delete(0, END)
+            sortedlist = pricesort_new()
+            for i in sortedlist:
+                lijstlabel.insert(END, i)
+
+        minstvoorkomend = Button(
+            master=knoppen,
+            text='Sorteer van goedkoop naar duur',
+            command=prijs2
+        )
+        minstvoorkomend.pack()
+
+        def eigenar():
+            lijstlabel.delete(0, END)
+            sortedlist = reversed(owners())
+            for i in sortedlist:
+                lijstlabel.insert(END, i)
+
+        eigenaren = Button(
+            master=knoppen,
+            text="Sorteer op aantal bezitters",
+            command=eigenar
+        )
+        eigenaren.pack()
+
     label1 = Label(
         master=screen,
-        text=steam[['name']].head(1),
+        text="Welkom",
+        font=("NS Sans", 20)
     )
     label1.pack()
 
@@ -321,6 +413,13 @@ def gui():
         command=genresort
     )
     genresortbutton.pack(side=RIGHT)
+
+    genresortbutton = Button(
+        master=screen,
+        text='sorteer op prijs',
+        command=pricesort
+    )
+    genresortbutton.pack(side=BOTTOM)
 
     screen.mainloop()
 

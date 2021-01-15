@@ -98,15 +98,15 @@ def modes(lijst):   # returnt wat het meeste voorkomt
 
 
 def genresort_new():
-    pijslist = list_functie("genres", "name")
-    sortedprijs = insertionsort(pijslist)
-    return sortedprijs
+    genrelist = list_functie("genres", "name")
+    sortedlist = insertionsort(genrelist)
+    return sortedlist
 
 
 def devsort_new():
-    pijslist = list_functie("developer", "name")
-    sortedprijs = insertionsort(pijslist)
-    return sortedprijs
+    devlist = list_functie("developer", "name")
+    sortedlist = insertionsort(devlist)
+    return sortedlist
 
 
 def positive_ratings():
@@ -126,6 +126,16 @@ def owners():
     sortedprijs = insertionsort(pijslist)
     return sortedprijs
 
+def frequencysort(lijst):   #returned lijst gesorteerd op meest voorkomende
+    waardes = freq(lijst)
+    for i in waardes.values():
+        key = lijst[i]
+        j = i - 1
+        while j >= 0 and key < lijst[j]:
+            lijst[j + 1] = lijst[j]
+            j -= 1
+        lijst[j + 1] = key
+    return lijst
 
 # Function to do insertion sort
 
@@ -147,9 +157,9 @@ def gui():
         )
         infolabel.pack(side=TOP)
 
-        lijstlabel = Label(
+        lijstlabel = Listbox(
             master=developersortwindow,
-            text=''
+            width=80
         )
         lijstlabel.pack(side=TOP)
 
@@ -157,27 +167,42 @@ def gui():
         knoppen.pack(side=BOTTOM)
 
         def alphasort():
-            lijstlabel.config(text='sort placeholde')
+            lijstlabel.delete(0, END)
+            sortedlist = devsort_new()
+            for i in sortedlist:
+                lijstlabel.insert(END, i)
+
         alphabetische = Button(
             master=knoppen,
-            text='sorteer op alphabetische volgorde',
+            text='sorteer op alphabetische volgorde A-Z',
             command=alphasort
         )
         alphabetische.pack()
 
         def reversealphasort():
-            lijstlabel.config(text='reversesort placeholder')
+            lijstlabel.delete(0, END)
+            sortedlist = devsort_new()
+            omgedraaid = reversed(sortedlist)
+            for i in omgedraaid:
+                lijstlabel.insert(END, i)
+
         reversedalphabetische = Button(
             master=knoppen,
-            text='sorteer op alphabetische volgorde omgedraaid',
+            text='sorteer op alphabetische volgorde Z-A',
             command=reversealphasort
         )
         reversedalphabetische.pack()
 
         def modus():
+            lijstlabel.delete(0, END)
             devlist = list_functie("developer", "name")
-            modus = counter(devlist)
-            lijstlabel.config(text=modus)
+            modussort = frequencysort(devlist)
+            # controlesort = sorted(freq(devlist).items(), key=lambda x: x[1], reverse=True)
+            # for i in controlesort:
+            #    print(i[0], i[1])
+            for i in modussort:
+                lijstlabel.insert(END, i)
+
         meestvoorkomend = Button(
             master=knoppen,
             text='sorteer op meest voorkomend',
@@ -186,7 +211,12 @@ def gui():
         meestvoorkomend.pack()
 
         def nietmodus():
-            lijstlabel.config(text='niet modus sort placeholder')
+            lijstlabel.delete(0, END)
+            devlist = list_functie('developer', 'name')
+            modussort = reversed(frequencysort(devlist))
+            for i in modussort:
+                lijstlabel.insert(END, i)
+
         minstvoorkomend = Button(
             master=knoppen,
             text='sorteer op minst voorkomend',
@@ -196,7 +226,7 @@ def gui():
 
     def genresort():
         genresortwindow = Toplevel(screen)
-        genresortwindow.title('sorteren op genres')
+        genresortwindow.title('sorteren op genre')
         genresortwindow.geometry('500x500')
 
         infolabel = Label(
@@ -205,9 +235,9 @@ def gui():
         )
         infolabel.pack(side=TOP)
 
-        lijstlabel = Label(
+        lijstlabel = Listbox(
             master=genresortwindow,
-            text=''
+            width=80
         )
         lijstlabel.pack(side=TOP)
 
@@ -215,25 +245,42 @@ def gui():
         knoppen.pack(side=BOTTOM)
 
         def alphasort():
-            lijstlabel.config(text='alphasort placeholder')
+            lijstlabel.delete(0, END)
+            sortedlist = genresort_new()
+            for i in sortedlist:
+                lijstlabel.insert(END, i)
+
         alphabetische = Button(
             master=knoppen,
-            text='sorteer op alphabetische volgorde',
+            text='sorteer op alphabetische volgorde A-Z',
             command=alphasort
         )
         alphabetische.pack()
 
         def reversealphasort():
-            lijstlabel.config(text='reverse alphasort placeholder')
+            lijstlabel.delete(0, END)
+            sortedlist = genresort_new()
+            omgedraaid = reversed(sortedlist)
+            for i in omgedraaid:
+                lijstlabel.insert(END, i)
+
         reversedalphabetische = Button(
             master=knoppen,
-            text='sorteer op alphabetische volgorde omgedraaid',
+            text='sorteer op alphabetische volgorde Z-A',
             command=reversealphasort
         )
         reversedalphabetische.pack()
 
         def modus():
-            lijstlabel.config(text='modus placeholder')
+            lijstlabel.delete(0, END)
+            genrelist = list_functie("genres", "name")
+            modussort = frequencysort(genrelist)
+            # controlesort = sorted(freq(devlist).items(), key=lambda x: x[1], reverse=True)
+            # for i in controlesort:
+            #    print(i[0], i[1])
+            for i in modussort:
+                lijstlabel.insert(END, i)
+
         meestvoorkomend = Button(
             master=knoppen,
             text='sorteer op meest voorkomend',
@@ -242,7 +289,12 @@ def gui():
         meestvoorkomend.pack()
 
         def nietmodus():
-            lijstlabel.config(text='niet modus placeholder')
+            lijstlabel.delete(0, END)
+            genrelist = list_functie('genres', 'name')
+            modussort = reversed(frequencysort(genrelist))
+            for i in modussort:
+                lijstlabel.insert(END, i)
+
         minstvoorkomend = Button(
             master=knoppen,
             text='sorteer op minst voorkomend',

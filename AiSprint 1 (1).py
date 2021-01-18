@@ -130,7 +130,7 @@ def owners():
     return sortedprijs
 
 
-def frequencysort(lijst):  # returned lijst gesorteerd op meest voorkomende
+def frequencysort(lijst):   #returned lijst gesorteerd op meest voorkomende
     waardes = freq(lijst)
     for i in waardes.values():
         key = lijst[i]
@@ -202,9 +202,6 @@ def gui():
             lijstlabel.delete(0, END)
             devlist = list_functie("developer", "name")
             modussort = frequencysort(devlist)
-            # controlesort = sorted(freq(devlist).items(), key=lambda x: x[1], reverse=True)
-            # for i in controlesort:
-            #    print(i[0], i[1])
             for i in modussort:
                 lijstlabel.insert(END, i)
 
@@ -214,20 +211,6 @@ def gui():
             command=modus
         )
         meestvoorkomend.pack()
-
-        def nietmodus():
-            lijstlabel.delete(0, END)
-            devlist = list_functie('developer', 'name')
-            modussort = reversed(frequencysort(devlist))
-            for i in modussort:
-                lijstlabel.insert(END, i)
-
-        minstvoorkomend = Button(
-            master=knoppen,
-            text='Sorteer op minst voorkomend',
-            command=nietmodus
-        )
-        minstvoorkomend.pack()
 
     def genresort():
         genresortwindow = Toplevel(screen)
@@ -280,9 +263,6 @@ def gui():
             lijstlabel.delete(0, END)
             genrelist = list_functie("genres", "name")
             modussort = frequencysort(genrelist)
-            # controlesort = sorted(freq(devlist).items(), key=lambda x: x[1], reverse=True)
-            # for i in controlesort:
-            #    print(i[0], i[1])
             for i in modussort:
                 lijstlabel.insert(END, i)
 
@@ -293,19 +273,6 @@ def gui():
         )
         meestvoorkomend.pack()
 
-        def nietmodus():
-            lijstlabel.delete(0, END)
-            genrelist = list_functie('genres', 'name')
-            modussort = reversed(frequencysort(genrelist))
-            for i in modussort:
-                lijstlabel.insert(END, i)
-
-        minstvoorkomend = Button(
-            master=knoppen,
-            text='Sorteer op minst voorkomend',
-            command=nietmodus
-        )
-        minstvoorkomend.pack()
 
     def pricesort():
         pricesortwindow = Toplevel(screen)

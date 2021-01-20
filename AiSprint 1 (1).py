@@ -15,8 +15,8 @@ def file_load():
     steam = pd.read_json(
         'https://raw.githubusercontent.com/tijmenjoppe/AnalyticalSkills-student/master/project/data/steam.json')
 
-
-file_load()
+#
+# file_load()
 
 
 def insertionsort(the_list):
@@ -130,7 +130,7 @@ def owners():
     return sortedprijs
 
 
-def frequencysort(lijst):   #returned lijst gesorteerd op meest voorkomende
+def frequencysort(lijst):  # returned lijst gesorteerd op meest voorkomende
     waardes = freq(lijst)
     for i in waardes.values():
         key = lijst[i]
@@ -202,6 +202,9 @@ def gui():
             lijstlabel.delete(0, END)
             devlist = list_functie("developer", "name")
             modussort = frequencysort(devlist)
+            # controlesort = sorted(freq(devlist).items(), key=lambda x: x[1], reverse=True)
+            # for i in controlesort:
+            #    print(i[0], i[1])
             for i in modussort:
                 lijstlabel.insert(END, i)
 
@@ -211,6 +214,20 @@ def gui():
             command=modus
         )
         meestvoorkomend.pack()
+
+        def nietmodus():
+            lijstlabel.delete(0, END)
+            devlist = list_functie('developer', 'name')
+            modussort = reversed(frequencysort(devlist))
+            for i in modussort:
+                lijstlabel.insert(END, i)
+
+        minstvoorkomend = Button(
+            master=knoppen,
+            text='Sorteer op minst voorkomend',
+            command=nietmodus
+        )
+        minstvoorkomend.pack()
 
     def genresort():
         genresortwindow = Toplevel(screen)
@@ -263,6 +280,9 @@ def gui():
             lijstlabel.delete(0, END)
             genrelist = list_functie("genres", "name")
             modussort = frequencysort(genrelist)
+            # controlesort = sorted(freq(devlist).items(), key=lambda x: x[1], reverse=True)
+            # for i in controlesort:
+            #    print(i[0], i[1])
             for i in modussort:
                 lijstlabel.insert(END, i)
 
@@ -273,6 +293,19 @@ def gui():
         )
         meestvoorkomend.pack()
 
+        def nietmodus():
+            lijstlabel.delete(0, END)
+            genrelist = list_functie('genres', 'name')
+            modussort = reversed(frequencysort(genrelist))
+            for i in modussort:
+                lijstlabel.insert(END, i)
+
+        minstvoorkomend = Button(
+            master=knoppen,
+            text='Sorteer op minst voorkomend',
+            command=nietmodus
+        )
+        minstvoorkomend.pack()
 
     def pricesort():
         pricesortwindow = Toplevel(screen)
@@ -281,7 +314,7 @@ def gui():
 
         infolabel1 = Label(
             master=pricesortwindow,
-            text='Hoe wil je de prijs sorteren?'
+            text='Hoe wil je het sorteren?'
         )
         infolabel1.pack(side=TOP)
 
@@ -383,7 +416,7 @@ def gui():
 
     genresortbutton = Button(
         master=screen,
-        text='sorteer op prijs',
+        text='sorteer op kwantitatieve variabele',
         command=pricesort
     )
     genresortbutton.pack(side=BOTTOM)
@@ -393,9 +426,3 @@ def gui():
 
 gui()
 
-
-# sorteer de data
-# hier is het als voorbeeld op prijs gesorteerd
-def sort():
-    steam.sort_values(by=['price'], inplace=True, ascending=True)
-    print(steam[['name', 'price']])

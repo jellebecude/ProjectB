@@ -3,29 +3,10 @@ import json
 from tkinter import *
 import urllib.request
 
-
-# zet panda library settings
-# globally defined het bronbestand als "steam"
-# voor mogelijke directoy problemen op andere apparaten is de website gebruikt
-def file_load():
-    pd.set_option('display.min_rows', None)
-    pd.set_option('display.max_rows', None)
-    pd.set_option('display.max_columns', None)
-    global steam
-    steam = pd.read_json(
-        'https://raw.githubusercontent.com/tijmenjoppe/AnalyticalSkills-student/master/project/data/steam.json')
-
-#
-# file_load()
-
-
+# sorteert een lijst
 def insertionsort(the_list):
-    # Traverse through 1 to len(arr)
     for i in range(1, len(the_list)):
         key = the_list[i]
-        # Move elements of arr[0..i-1], that are
-        # greater than key, to one position ahead
-        # of their current position
         j = i - 1
         while j >= 0 and key < the_list[j]:
             the_list[j + 1] = the_list[j]
@@ -40,19 +21,18 @@ def list_functie(thing1, thing2):
     with urllib.request.urlopen(
             'https://raw.githubusercontent.com/tijmenjoppe/AnalyticalSkills-student/master/project/data/steam.json') as url:
         data = json.loads(url.read().decode())
-        # print(sorted(data, key = lambda i: (i['name'])))
         for i in data:
             naam = i[thing1], i[thing2]
             listone.append(naam)
     return listone
 
-
+# geeft een lijst die gesorteerd is op prijs
 def pricesort_new():
-    pijslist = list_functie("price", "name")
-    sortedprijs = insertionsort(pijslist)
+    prijslist = list_functie("price", "name")
+    sortedprijs = insertionsort(prijslist)
     return sortedprijs
 
-
+# geeft het gemiddelde van een lijst
 def gemiddelde(lijst):
     items = len(lijst)
     totaal = 0
@@ -61,8 +41,8 @@ def gemiddelde(lijst):
     gem = (totaal / items)
     return round(gem)
 
-
-def freq(lijst):  # returns hoevaak iets terugkomt
+# geeft een dictionary waarbij de waarde is hoevaak iets voorkomt in een lijst
+def freq(lijst):
     newlst = []
     for items in lijst:
         newlst.append(items[0])
@@ -75,10 +55,8 @@ def freq(lijst):  # returns hoevaak iets terugkomt
 
     return freqs
 
-    # getal : aantal voorkomens
-
-
-def modes(lijst):  # returnt wat het meeste voorkomt
+# geeft de string die het meeste voorkomt in een lijst
+def modes(lijst):
     modi = []
     waardes = freq(lijst)
     grootste = 0
@@ -91,46 +69,46 @@ def modes(lijst):  # returnt wat het meeste voorkomt
             modi.append(key)
     return sorted(modi)
 
-
+# geeft de eerste string uit een lijst
 def mini(lijst):
     return lijst[0]
 
-
+# geeft de laatste string uit een lijst
 def maxi(lijst):
     return lijst[-1]
 
-
+# geeft een lijst die gesorteerd is op genre
 def genresort_new():
     genrelist = list_functie("genres", "name")
     sortedlist = insertionsort(genrelist)
     return sortedlist
 
-
+# geeft een lijst die gesorteerd is op developer
 def devsort_new():
     devlist = list_functie("developer", "name")
     sortedlist = insertionsort(devlist)
     return sortedlist
 
-
+# geeft een lijst die gesorteerd is op positive ratings
 def positive_ratings():
     pijslist = list_functie("positive_ratings", "name")
     sortedprijs = insertionsort(pijslist)
     return sortedprijs
 
-
+# geeft een lijst die gesorteerd is op negative ratings
 def negative_ratings():
     pijslist = list_functie("negative_ratings", "name")
     sortedprijs = insertionsort(pijslist)
     return sortedprijs
 
-
+# geeft een lijst die gesorteerd is op aantal eigenaaren
 def owners():
     pijslist = list_functie("owners", "name")
     sortedprijs = insertionsort(pijslist)
     return sortedprijs
 
-
-def frequencysort(lijst):  # returned lijst gesorteerd op meest voorkomende
+# geeft een lijst die gesorteerd is op meest voorkomende
+def frequencysort(lijst):
     waardes = freq(lijst)
     for i in waardes.values():
         key = lijst[i]
@@ -141,12 +119,8 @@ def frequencysort(lijst):  # returned lijst gesorteerd op meest voorkomende
         lijst[j + 1] = key
     return lijst
 
-
-# Function to do insertion sort
-
-
-# (voorlopig) alleen functioneel
-# laat de naam van het eerste spel in het bronbestand zien
+# laat de gui zien waar alle knoppen in staan,
+# deze roept de andere functies aan wanneer nodig
 def gui():
     screen = Tk()
     screen.geometry("480x270")
@@ -422,7 +396,4 @@ def gui():
     genresortbutton.pack(side=BOTTOM)
 
     screen.mainloop()
-
-
 gui()
-
